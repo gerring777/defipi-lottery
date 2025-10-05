@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DeFiPi Lottery (Sandbox)</title>
+  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+  <script>
+    // Ініціалізуємо Pi SDK у режимі sandbox
+    Pi.init({ sandbox: true });
+
+    async function connect() {
+      try {
+        const scopes = ['username', 'payments'];
+        const auth = await Pi.authenticate(scopes, p => console.log('Incomplete payment:', p));
+        document.getElementById('out').textContent = JSON.stringify(auth, null, 2);
+      } catch (e) {
+        document.getElementById('out').textContent = 'Auth error: ' + (e?.message || e);
+      }
+    }
+  </script>
+</head>
+<body style="font-family:sans-serif;text-align:center;background:#111;color:#eee">
+  <h1>DeFiPi Lottery Sandbox</h1>
+  <button onclick="connect()">Connect Pi</button>
+  <pre id="out"></pre>
+</body>
+</html>
